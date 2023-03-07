@@ -1,6 +1,25 @@
 // 获取 userId 的回调
 export type GetUserId = (code: string) => Promise<string>
 
+export interface UserInfoRes {
+  code: number
+  data: {
+    department: string[]
+    errcode: number
+    errmsg: string
+    isleader: number
+    name: string
+    position: string
+    status: number
+    telephone: string
+    userid: string
+  }
+  message: string
+}
+
+// 获取用户信息的函数
+export type GetUserByCode = (code: string) => Promise<UserInfoRes>
+
 // 侧边栏配置信息
 export interface Config {
   corpId: string

@@ -1,18 +1,18 @@
 import _wxApis from './consts/wxApis'
 import _asyncCall from './apis/asyncCall'
 import _call from './apis/call'
+import _checkRedirect from './apis/checkRedirect'
 import _invoke from './apis/invoke'
 import _initSdk from './apis/initSdk'
 import {
   Config,
   GetConfigSignature,
   GetAgentConfigSignature,
-  GetUserId,
+  GetUserByCode,
   AsyncCallMap,
   CallMap,
   InvokeMap,
 } from './types'
-import { infoLog } from './utils/log'
 
 // 所有 API 列表
 export const wxApis = _wxApis
@@ -48,4 +48,9 @@ export const invoke = async <K extends keyof InvokeMap>(
   params: InvokeMap[K]['params'] = {},
 ): Promise<InvokeMap[K]['res']> => {
   return _invoke<K>(apiName, params)
+}
+
+// 检查是否重定向，并设置 userId
+export const checkRedirect = async (config: Config, getUserByCode: GetUserByCode) => {
+  return _checkRedirect(config, getUserByCode)
 }
